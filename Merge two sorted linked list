@@ -1,0 +1,27 @@
+  public static LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
+            // write your code hered
+            LinkedList list = new LinkedList();
+            Node one = l1.head;
+            Node two = l2.head;
+            
+            while(one != null && two != null){
+                if(one.data <= two.data){
+                    list.addLast(one.data);
+                    one = one.next;
+                }else{
+                    list.addLast(two.data);
+                    two = two.next;
+                }
+            }
+             while(one != null){
+                list.addLast(one.data);
+                one = one.next;
+            }
+             while(two != null){
+                list.addLast(two.data);
+                two = two.next;
+            }
+            
+            return list;
+            
+        }

@@ -1,0 +1,16 @@
+ public int kthFromLast(int k){
+      // write your code here
+      Node s = head;
+      Node f = head;
+      for(int i = 0 ; i < k; i++){
+          f = f.next;
+      }
+     // if(f.next == null || f == null) return -1;
+      
+      while(f.next != null){
+          s = s.next;
+          f = f.next;
+      }
+      
+      return s.data;
+    }

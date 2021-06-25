@@ -18,3 +18,40 @@ class Solution {
         current.right = tempright;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+    public void flatten(TreeNode root) {
+         if(root == null){
+            return;          //base case 1
+        }
+        if(root.left == null && root.right == null){
+            return;          // base case 2
+        }
+        flatten(root.left);        //get your left tree flattned
+        flatten(root.right);       //get your right tree flattned
+        
+        //now we have got a linear left tree and right tree. So now the only task remains to append right subtree to rightmost node of left sub tree
+//and then make left subtree as right child of root, and lastly nullify the left part of the root.
+
+        if(root.left != null){       //  if left part is not present then we have our answwer as have already falttened the right subtree
+            TreeNode curr = root.left;
+            while(curr.right != null) {
+                curr = curr.right;          //get the rightmost child of left subtree
+            }
+            curr.right = root.right;    //point right subtree to right of this child
+            root.right = root.left;     //point left subtree to right of root
+            root.left = null;           //nullify the left part of root.
+        }
+    }
+}

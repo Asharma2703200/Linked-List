@@ -1,0 +1,35 @@
+    public static int add(Node one , int pv1 , Node two , int pv2 , LinkedList ans){
+        if(one == null || two == null){
+            return 0;
+        }
+        
+        int oc = 0;
+        int data = 0;
+        
+        if(pv1 > pv2){
+            oc = add(one.next , pv1 - 1 , two , pv2 , ans);
+            data = one.data + oc;
+        }else if(pv1 < pv2){
+            oc = add(one , pv1 , two.next , pv2 - 1 , ans);
+            data = two.data + oc;
+        }else{
+            oc = add(one.next , pv1 - 1 , two.next , pv2 - 1 , ans);
+            data = one.data + two.data + oc;
+        }
+        oc = data /10;
+        data = data % 10;
+        
+        ans.addFirst(data);
+        
+        return oc;
+    }
+    public static LinkedList addTwoLists(LinkedList one, LinkedList two) {
+      // write your code here
+      LinkedList ans = new LinkedList();
+      int oc = add(one.head , one.size , two.head , two.size , ans);
+      if(oc >  0){
+          ans.addFirst(oc);
+      }
+      return ans;
+    }
+  }

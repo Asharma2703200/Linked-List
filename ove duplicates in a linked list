@@ -1,0 +1,17 @@
+ public void removeDuplicates(){
+      // write your code here
+      LinkedList list = new LinkedList();
+      
+       while(this.size() > 0){
+           int val = this.getFirst();
+           this.removeFirst();
+           
+           if(list.size() == 0 || list.getAt(list.size() - 1) != val){
+               list.addLast(val);
+           }
+       }
+       this.head = list.head;
+       this.tail = list.tail;
+       this.size = list.size;
+       
+    }

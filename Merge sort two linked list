@@ -1,0 +1,51 @@
+    public static LinkedList mergeTwoSortedLists(LinkedList l1, LinkedList l2) {
+      LinkedList ml = new LinkedList();
+
+      Node one = l1.head;
+      Node two = l2.head;
+      while (one != null && two != null) {
+        if (one.data < two.data) {
+          ml.addLast(one.data);
+          one = one.next;
+        } else {
+          ml.addLast(two.data);
+          two = two.next;
+        }
+      }
+
+      while (one != null) {
+        ml.addLast(one.data);
+        one = one.next;
+      }
+
+      while (two != null) {
+        ml.addLast(two.data);
+        two = two.next;
+      }
+
+      return ml;
+    }
+    private static Node getMidNode(Node head , Node tail){
+        Node s = head;
+        Node f = head;
+        while(f != tail && f.next != tail){
+            f = f.next.next;
+            s = s.next;
+        }
+        return s;
+    }
+    public static LinkedList mergeSort(Node head, Node tail){
+      // write yr code here
+      if(head == tail){
+        LinkedList br = new LinkedList();
+        br.addLast(head.data);
+        return br;
+      }
+
+      Node mid = getMidNode(head, tail);
+      LinkedList fsh = mergeSort(head, mid);
+      LinkedList ssh = mergeSort(mid.next, tail);
+      LinkedList sl = mergeTwoSortedLists(fsh, ssh);
+      return sl;
+    }
+  }

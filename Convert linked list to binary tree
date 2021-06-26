@@ -1,0 +1,27 @@
+class Solution {
+    
+    public TreeNode sortedListToBST(ListNode head) {
+       if(head == null) return null;
+        return solve(head , null);
+    }
+    public ListNode getMid(ListNode head , ListNode tail){
+      ListNode p1 = head, p2 = head;
+        while (p2 != tail && p2.next != tail) {
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+        return p1;
+    } 
+    public TreeNode solve(ListNode head , ListNode tail){
+        
+        if(head == null || head == tail) return null;
+        
+        ListNode mid = getMid(head , tail);
+        
+        TreeNode root = new TreeNode(mid.val);
+        root.left = solve(head , mid);
+        root.right = solve(mid.next , tail);
+        
+        return root;
+    }
+}

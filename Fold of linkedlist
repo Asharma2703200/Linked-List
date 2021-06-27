@@ -1,0 +1,79 @@
+import java.util.*;
+
+class Main {
+    public static class ListNode {
+        int val = 0;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+    public static ListNode getMid(ListNode head){
+        ListNode s = head;
+        ListNode f = head;
+        while(f.next != null && f.next.next != null){
+            s = s.next;
+            f = f.next.next;
+        }
+        return s;
+    }
+    public static ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        while(cur != null){
+            ListNode next  = cur.next;
+            
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+    public static void fold(ListNode head) {
+        
+        ListNode mid = getMid(head);
+        ListNode s = mid.next;
+        ListNode r = reverse(s);
+        
+        mid.next = null;
+        
+        ListNode c1 = head;
+        ListNode c2 = r;
+        
+        while(c1 != null && c2 != null){
+            ListNode f1 = c1.next;
+            ListNode f2 = c2.next;
+            
+            c1.next = c2;
+            c2.next = f1;
+            
+            c1 = f1;
+            c2 = f2;
+        }
+        
+        
+    }
+
+    static void printList(ListNode node) {
+        while (node != null) {
+            System.out.print(node.val + " ");
+            node = node.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy;
+        while (n-- > 0) {
+            prev.next = new ListNode(scn.nextInt());
+            prev = prev.next;
+        }
+
+        ListNode head = dummy.next;
+        fold(head);
+        printList(head);
+    }
+}

@@ -1,0 +1,33 @@
+ListNode dummy = new ListNode(0);
+    ListNode pointer = dummy;
+    int carry = 0;
+	
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+       //Base Condition
+        if(l1 == null && l2 == null){
+            return pointer;
+        }
+        
+        //Getting the SUM and CARRY
+        int n1 = l1 != null ? l1.val : 0;
+        int n2 = l2 != null ? l2.val : 0;
+        int sum = n1 + n2 + carry;
+        carry = sum/10;
+                
+		//Setting the pointer.next to a new node which has value = sum
+        pointer.next = new ListNode(sum % 10);
+		
+		//Make pointer now point to this new node
+        pointer = pointer.next;
+        
+        l1 = l1 != null ? l1.next : l1;
+        l2 = l2 != null ? l2.next : l2;
+        
+        //Make a recursive call to calculate the Sum of next two nodes
+        addTwoNumbers(l1,l2);
+        
+        //Finally, If we have carry then add it at the end as a separate node
+        if(carry != 0) pointer.next = new ListNode(carry);
+
+        return dummy.next;
+    }
